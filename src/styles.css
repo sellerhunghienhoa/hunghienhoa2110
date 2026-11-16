@@ -20,22 +20,42 @@ body,
 }
 
 .app-viewport {
-  min-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
-  background: radial-gradient(circle at 50% 20%, #1d4932 0%, #09140e 78%);
+  background: #000;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
 }
 
 .phone-shell {
   width: 100%;
-  max-width: 440px;
-  height: 100dvh;
+  max-width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, #62c4d8 0%, #8cd982 32%, #4c3727 72%, #3a271a 100%);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.65);
+  box-shadow: none;
+  border-radius: 0;
+}
+
+@media (min-width: 768px) and (hover: hover) {
+  .phone-shell {
+    max-width: 480px;
+    height: 96vh;
+    border-radius: 28px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.8), 0 0 0 4px #263328;
+    margin: auto;
+  }
 }
 
 /* ===========================
@@ -3027,8 +3047,7 @@ button:disabled {
   align-items: center;
 }
 
-.splash-bar-bg,
-.splash-bar-fill {
+.splash-bar-bg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -3037,7 +3056,22 @@ button:disabled {
   border-radius: 99px;
 }
 
+.splash-bar-fill-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  border-radius: 99px;
+  transition: width 0.25s ease-out;
+  z-index: 1;
+}
+
 .splash-bar-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 99px;
   padding: 2px;
 }
 
@@ -3078,13 +3112,48 @@ button:disabled {
   object-fit: fill;
 }
 
-.apk-login-btn span {
+.apk-login-btn span,
+.apk-btn-text {
   position: relative;
   z-index: 2;
-  font-size: 17px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
   font-weight: 900;
   color: #fff;
-  text-shadow: 0 2px 3px rgba(20, 83, 45, 0.95);
+  text-shadow: 0 2px 4px rgba(10, 40, 20, 0.95), 0 0 8px rgba(250, 204, 21, 0.5);
+}
+
+.apk-start-ready-pulse {
+  animation: pulseReady 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseReady {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 18px rgba(234, 179, 8, 0.65));
+  }
+}
+
+.apk-loading-hint {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  animation: hintBlink 1.4s infinite ease-in-out;
+}
+
+@keyframes hintBlink {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
 .splash-version-tag {

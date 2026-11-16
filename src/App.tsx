@@ -27,6 +27,9 @@ type MainTab = 'store' | 'legend' | 'match' | 'tournament' | 'island';
 
 export function App() {
   const [enteredGame, setEnteredGame] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(15);
+  const [loadingPhase, setLoadingPhase] = useState('Checking game version...');
+  const [readyToStart, setReadyToStart] = useState(false);
   const [tab, setTab] = useState<MainTab>('match');
   const [profile, setProfile] = useState<PlayerProfile>(() => loadProfile());
   const [queuedMatch, setQueuedMatch] = useState<{
@@ -37,6 +40,41 @@ export function App() {
   const [battleActive, setBattleActive] = useState(false);
   const [wheelOpen, setWheelOpen] = useState(false);
   const [activeModal, setActiveModal] = useState<ApkModalKind>(null);
+
+  useEffect(() => {
+    if (enteredGame) return;
+    const interval = setInterval(() => {
+      setLoadingProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setReadyToStart(true);
+          setLoadingPhase('Ready! Tap to Start');
+          return 100;
+        }
+        const step = Math.floor(Math.random() * 14 + 8);
+        const next = Math.min(prev + step, 100);
+        if (next < 35) {
+          setLoadingPhase('Connecting to server...');
+        } else if (next < 70) {
+          setLoadingPhase('Loading game assets & legends...');
+        } else if (next < 95) {
+          setLoadingPhase('Configuring PvP Match arena...');
+        } else {
+          setReadyToStart(true);
+          setLoadingPhase('Ready! Tap to Start');
+        }
+        return next;
+      });
+    }, 220);
+    return () => clearInterval(interval);
+  }, [enteredGame]);
+
+  const handleStartGame = useCallback(() => {
+    unlockAudio();
+    playSfx('ui-click');
+    playBgm('lobby');
+    setEnteredGame(true);
+  }, []);
 
   useEffect(() => {
     saveProfile(profile);
@@ -211,7 +249,11 @@ export function App() {
   if (!enteredGame) {
     return (
       <div className="app-viewport">
-        <div className="phone-shell splash-screen apk-splash">
+        <div
+          className="phone-shell splash-screen apk-splash"
+          onClick={readyToStart ? handleStartGame : undefined}
+          style={{ cursor: readyToStart ? 'pointer' : 'default' }}
+        >
           <div className="splash-logo-wrap">
             <img
               src="./assets/ui/logo.png"
@@ -238,34 +280,45 @@ export function App() {
                 draggable={false}
                 className="splash-bar-bg"
               />
-              <img
-                src="./assets/ui/login/img_updatebar01.png"
-                alt=""
-                draggable={false}
-                className="splash-bar-fill"
-              />
-              <span className="splash-bar-label">Đang khởi tạo game... 100%</span>
+              <div
+                className="splash-bar-fill-wrap"
+                style={{ width: `${loadingProgress}%` }}
+              >
+                <img
+                  src="./assets/ui/login/img_updatebar01.png"
+                  alt=""
+                  draggable={false}
+                  className="splash-bar-fill"
+                />
+              </div>
+              <span className="splash-bar-label">
+                {loadingPhase} ({loadingProgress}%)
+              </span>
             </div>
-            <button
-              type="button"
-              className="apk-login-btn"
-              onClick={() => {
-                setEnteredGame(true);
-                unlockAudio();
-                playSfx('ui-click');
-              }}
-            >
-              <img
-                src="./assets/ui/login/btn_login01.png"
-                alt=""
-                draggable={false}
-                className="apk-login-bg"
-              />
-              <span>Vào Game</span>
-            </button>
+
+            {readyToStart ? (
+              <button
+                type="button"
+                className="apk-login-btn apk-start-ready-pulse"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleStartGame();
+                }}
+              >
+                <img
+                  src="./assets/ui/login/btn_login01.png"
+                  alt=""
+                  draggable={false}
+                  className="apk-login-bg"
+                />
+                <span className="apk-btn-text">TOUCH TO START</span>
+              </button>
+            ) : (
+              <div className="apk-loading-hint">Connecting server...</div>
+            )}
           </div>
 
-          <div className="splash-version-tag">(S011_13) V0.0.1 (2.1.43)</div>
+          <div className="splash-version-tag">Version 2.1.43 (S011_13)</div>
         </div>
       </div>
     );
