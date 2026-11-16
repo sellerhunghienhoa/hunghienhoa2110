@@ -96,11 +96,12 @@ jobs:
           xcodebuild -project ios/App/App.xcodeproj \
             -scheme App \
             -configuration Release \
-            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
             -archivePath build-ios/App.xcarchive \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_STYLE="Manual" \
             archive
 
           cp -R build-ios/App.xcarchive/Products/Applications/App.app build-ios/Payload/App.app
