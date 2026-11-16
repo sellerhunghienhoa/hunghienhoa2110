@@ -1,0 +1,41 @@
+
+b102.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hua1
+  rotate: true
+  xy: 146, 1
+  size: 69, 47
+  orig: 69, 47
+  offset: 0, 0
+  index: -1
+hua2
+  rotate: true
+  xy: 194, 30
+  size: 40, 45
+  orig: 40, 45
+  offset: 0, 0
+  index: -1
+hua3
+  rotate: false
+  xy: 146, 71
+  size: 82, 41
+  orig: 82, 41
+  offset: 0, 0
+  index: -1
+shuwu
+  rotate: true
+  xy: 1, 1
+  size: 111, 89
+  orig: 111, 89
+  offset: 0, 0
+  index: -1
+yingzi
+  rotate: true
+  xy: 91, 9
+  size: 103, 54
+  orig: 103, 54
+  offset: 0, 0
+  index: -1

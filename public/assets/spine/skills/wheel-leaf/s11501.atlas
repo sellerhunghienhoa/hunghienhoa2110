@@ -1,0 +1,181 @@
+
+s11501.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+daimao1
+  rotate: true
+  xy: 358, 503
+  size: 53, 35
+  orig: 53, 35
+  offset: 0, 0
+  index: -1
+daimao2
+  rotate: false
+  xy: 367, 164
+  size: 78, 95
+  orig: 78, 95
+  offset: 0, 0
+  index: -1
+erduo1
+  rotate: true
+  xy: 560, 230
+  size: 140, 77
+  orig: 140, 77
+  offset: 0, 0
+  index: -1
+erduo2
+  rotate: false
+  xy: 217, 447
+  size: 140, 109
+  orig: 140, 109
+  offset: 0, 0
+  index: -1
+erduo3
+  rotate: false
+  xy: 147, 49
+  size: 63, 127
+  orig: 63, 127
+  offset: 0, 0
+  index: -1
+erduomao
+  rotate: true
+  xy: 1, 1
+  size: 89, 64
+  orig: 89, 64
+  offset: 0, 0
+  index: -1
+jiao1
+  rotate: false
+  xy: 358, 455
+  size: 24, 47
+  orig: 24, 47
+  offset: 0, 0
+  index: -1
+jiao2
+  rotate: false
+  xy: 273, 336
+  size: 19, 32
+  orig: 19, 32
+  offset: 0, 0
+  index: -1
+jio1
+  rotate: false
+  xy: 66, 1
+  size: 57, 89
+  orig: 57, 89
+  offset: 0, 0
+  index: -1
+jio2
+  rotate: false
+  xy: 1, 91
+  size: 71, 73
+  orig: 71, 73
+  offset: 0, 0
+  index: -1
+shenti
+  rotate: false
+  xy: 1, 165
+  size: 145, 159
+  orig: 145, 162
+  offset: 0, 0
+  index: -1
+texiao1
+  rotate: false
+  xy: 174, 402
+  size: 42, 154
+  orig: 42, 154
+  offset: 0, 0
+  index: -1
+texiao2
+  rotate: false
+  xy: 1, 325
+  size: 172, 231
+  orig: 172, 283
+  offset: 0, 0
+  index: -1
+texiao3
+  rotate: false
+  xy: 1, 557
+  size: 393, 368
+  orig: 393, 368
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 147, 177
+  size: 147, 122
+  orig: 147, 122
+  offset: 0, 0
+  index: -1
+tui1
+  rotate: true
+  xy: 560, 371
+  size: 97, 87
+  orig: 97, 87
+  offset: 0, 0
+  index: -1
+tui2
+  rotate: false
+  xy: 560, 469
+  size: 88, 88
+  orig: 88, 88
+  offset: 0, 0
+  index: -1
+weiba1
+  rotate: true
+  xy: 395, 558
+  size: 367, 308
+  orig: 367, 308
+  offset: 0, 0
+  index: -1
+weiba2
+  rotate: true
+  xy: 395, 260
+  size: 297, 164
+  orig: 297, 164
+  offset: 0, 0
+  index: -1
+weiba3
+  rotate: true
+  xy: 270, 199
+  size: 130, 96
+  orig: 130, 96
+  offset: 0, 0
+  index: -1
+weibo
+  rotate: true
+  xy: 308, 346
+  size: 100, 80
+  orig: 100, 80
+  offset: 0, 0
+  index: -1
+yanjing
+  rotate: false
+  xy: 217, 410
+  size: 90, 36
+  orig: 90, 36
+  offset: 0, 0
+  index: -1
+youshou
+  rotate: false
+  xy: 73, 111
+  size: 71, 53
+  orig: 71, 53
+  offset: 0, 0
+  index: -1
+zuiba
+  rotate: false
+  xy: 273, 369
+  size: 34, 40
+  orig: 34, 40
+  offset: 0, 0
+  index: -1
+zuoshou
+  rotate: false
+  xy: 174, 330
+  size: 98, 71
+  orig: 98, 71
+  offset: 0, 0
+  index: -1

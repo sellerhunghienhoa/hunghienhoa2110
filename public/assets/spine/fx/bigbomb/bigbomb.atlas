@@ -1,0 +1,48 @@
+
+bigbomb.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cheng
+  rotate: false
+  xy: 224, 0
+  size: 74, 84
+  orig: 84, 84
+  offset: 4, 0
+  index: -1
+hong
+  rotate: false
+  xy: 298, 0
+  size: 74, 84
+  orig: 84, 84
+  offset: 5, 0
+  index: -1
+huang
+  rotate: false
+  xy: 372, 0
+  size: 74, 84
+  orig: 84, 84
+  offset: 5, 0
+  index: -1
+lan
+  rotate: false
+  xy: 0, 0
+  size: 75, 84
+  orig: 84, 84
+  offset: 3, 0
+  index: -1
+lv
+  rotate: false
+  xy: 75, 0
+  size: 75, 84
+  orig: 84, 84
+  offset: 4, 0
+  index: -1
+zi
+  rotate: false
+  xy: 150, 0
+  size: 74, 84
+  orig: 84, 84
+  offset: 4, 0
+  index: -1

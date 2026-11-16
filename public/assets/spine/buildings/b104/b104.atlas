@@ -1,0 +1,41 @@
+
+b104.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chizi
+  rotate: true
+  xy: 1, 21
+  size: 102, 72
+  orig: 102, 72
+  offset: 0, 0
+  index: -1
+hua
+  rotate: true
+  xy: 135, 1
+  size: 44, 26
+  orig: 44, 26
+  offset: 0, 0
+  index: -1
+mupai
+  rotate: true
+  xy: 1, 1
+  size: 19, 27
+  orig: 19, 27
+  offset: 0, 0
+  index: -1
+shuagan
+  rotate: true
+  xy: 135, 46
+  size: 77, 52
+  orig: 77, 52
+  offset: 0, 0
+  index: -1
+yingzi
+  rotate: true
+  xy: 74, 10
+  size: 113, 60
+  orig: 113, 60
+  offset: 0, 0
+  index: -1

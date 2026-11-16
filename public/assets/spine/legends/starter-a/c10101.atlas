@@ -1,0 +1,167 @@
+
+c10101.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bizi
+  rotate: true
+  xy: 24, 1
+  size: 6, 5
+  orig: 6, 5
+  offset: 0, 0
+  index: -1
+buzi12
+  rotate: false
+  xy: 24, 8
+  size: 20, 12
+  orig: 20, 12
+  offset: 0, 0
+  index: -1
+shenti
+  rotate: true
+  xy: 316, 66
+  size: 61, 50
+  orig: 61, 50
+  offset: 0, 0
+  index: -1
+shetou
+  rotate: false
+  xy: 38, 3
+  size: 10, 4
+  orig: 10, 4
+  offset: 0, 0
+  index: -1
+shuguo2
+  rotate: true
+  xy: 106, 35
+  size: 92, 91
+  orig: 92, 91
+  offset: 0, 0
+  index: -1
+suizi
+  rotate: false
+  xy: 374, 12
+  size: 29, 30
+  orig: 29, 30
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 268, 58
+  size: 69, 47
+  orig: 69, 47
+  offset: 0, 0
+  index: -1
+toufa
+  rotate: false
+  xy: 1, 2
+  size: 22, 18
+  orig: 22, 18
+  offset: 0, 0
+  index: -1
+weiba
+  rotate: true
+  xy: 1, 21
+  size: 106, 104
+  orig: 106, 104
+  offset: 0, 0
+  index: -1
+weibo
+  rotate: false
+  xy: 218, 1
+  size: 77, 37
+  orig: 77, 37
+  offset: 0, 0
+  index: -1
+xiaoshuguo
+  rotate: true
+  xy: 180, 4
+  size: 30, 37
+  orig: 30, 37
+  offset: 0, 0
+  index: -1
+yezi
+  rotate: false
+  xy: 106, 1
+  size: 38, 33
+  orig: 38, 35
+  offset: 0, 0
+  index: -1
+yezi_2
+  rotate: false
+  xy: 198, 39
+  size: 69, 88
+  orig: 69, 93
+  offset: 0, 0
+  index: -1
+youer
+  rotate: false
+  xy: 335, 14
+  size: 38, 51
+  orig: 38, 51
+  offset: 0, 0
+  index: -1
+youjio
+  rotate: false
+  xy: 404, 15
+  size: 26, 27
+  orig: 26, 27
+  offset: 0, 0
+  index: -1
+youmeimao
+  rotate: true
+  xy: 30, 2
+  size: 5, 7
+  orig: 5, 7
+  offset: 0, 0
+  index: -1
+yuoshou
+  rotate: false
+  xy: 374, 43
+  size: 30, 34
+  orig: 30, 34
+  offset: 0, 0
+  index: -1
+zuobiyan
+  rotate: false
+  xy: 45, 10
+  size: 45, 10
+  orig: 45, 10
+  offset: 0, 0
+  index: -1
+zuoer
+  rotate: false
+  xy: 296, 2
+  size: 38, 55
+  orig: 38, 55
+  offset: 0, 0
+  index: -1
+zuojio
+  rotate: true
+  xy: 145, 3
+  size: 31, 34
+  orig: 31, 34
+  offset: 0, 0
+  index: -1
+zuomeimao
+  rotate: false
+  xy: 49, 2
+  size: 10, 7
+  orig: 10, 7
+  offset: 0, 0
+  index: -1
+zuoshou
+  rotate: true
+  xy: 388, 105
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+zuoyanjing
+  rotate: true
+  xy: 367, 78
+  size: 49, 20
+  orig: 49, 20
+  offset: 0, 0
+  index: -1

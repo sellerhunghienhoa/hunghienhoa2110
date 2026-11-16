@@ -1,0 +1,5153 @@
+:root {
+  font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  color: #fffaf0;
+  background-color: #0b1912;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.app-viewport {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 20%, #1d4932 0%, #09140e 78%);
+}
+
+.phone-shell {
+  width: 100%;
+  max-width: 440px;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #62c4d8 0%, #8cd982 32%, #4c3727 72%, #3a271a 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.65);
+}
+
+/* ===========================
+   Floating Translucent Top Bar
+   =========================== */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 0px) + 5px) 8px 4px;
+  background: linear-gradient(180deg, rgba(10, 24, 16, 0.36) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.level-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  pointer-events: auto;
+}
+
+.level-crest-svg {
+  width: 40px;
+  height: 36px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.level-num {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 13px;
+  color: #ffffff;
+  -webkit-text-stroke: 0.9px #4c1d95;
+  text-shadow: 0 1px 3px #1e1b4b, 0 0 6px #6b21a8;
+}
+
+.xp-text-inline {
+  margin-top: -1px;
+  font-size: 9px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px #000, 0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+.currency-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 3px;
+  pointer-events: auto;
+}
+
+.sound-toggle-pill {
+  width: 24px;
+  height: 22px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(15, 28, 22, 0.56);
+  color: #fff;
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.sound-toggle-pill.muted {
+  opacity: 0.65;
+}
+
+.currency-pill {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(15, 28, 22, 0.56);
+  color: #fff;
+  border-radius: 99px;
+  padding: 2px 9px 2px 24px;
+  min-width: 68px;
+  height: 22px;
+  font-size: 11px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.cur-icon-wrap {
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.cur-plus-img {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.cur-val {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* ===========================
+   Main Scroll Stage (Edge-to-Edge)
+   =========================== */
+.main-stage {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-stage.no-chrome {
+  overflow: hidden;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Shared Glossy Buttons */
+.btn-primary,
+.btn-secondary,
+.btn-ghost {
+  border: none;
+  border-radius: 99px;
+  padding: 9px 14px;
+  font-weight: 900;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #fde047 0%, #f59e0b 85%, #d97706 100%);
+  color: #451a03;
+  border: 1.5px solid #fef9c3;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.55), 0 3px 0 #92400e;
+}
+
+.btn-secondary {
+  background: linear-gradient(180deg, #6ee732 0%, #22c55e 75%, #15803d 100%);
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+  border: 1.5px solid #bbf7d0;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45), 0 3px 0 #14532d;
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.ui-sprite-icon,
+.gem-svg,
+.legend-svg {
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ===========================
+   Carved Wooden Bottom Navigation Dock (Screenshot 3)
+   =========================== */
+.bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: linear-gradient(180deg, #98663d 0%, #774b27 65%, #5d381b 100%);
+  border-top: 2.5px solid #cf9763;
+  padding: 2px 2px calc(env(safe-area-inset-bottom, 0px) + 5px);
+  z-index: 25;
+  box-shadow: inset 0 2px 0 rgba(254, 243, 199, 0.28), 0 -4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.nav-btn {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: #fffdf5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 4px 2px 2px;
+  cursor: pointer;
+  border-right: 1px solid rgba(58, 30, 12, 0.45);
+}
+
+.nav-btn:last-child {
+  border-right: none;
+}
+
+.nav-btn.active {
+  margin-top: -10px;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  background: linear-gradient(180deg, #7cf23c 0%, #44bc1c 72%, #319412 100%);
+  border: 2px solid #b5f97d;
+  border-bottom-color: #216e0b;
+  border-radius: 12px 12px 6px 6px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.65), 0 -2px 12px rgba(114, 240, 48, 0.55);
+  z-index: 2;
+}
+
+.nav-icon {
+  display: grid;
+  place-items: center;
+  height: 30px;
+}
+
+.nav-btn.active .nav-icon {
+  height: 34px;
+  margin-top: -4px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.1px;
+  text-shadow: 0 1px 0 #3f2204, 0 -1px 0 #3f2204, 1px 0 0 #3f2204, -1px 0 0 #3f2204;
+}
+
+.nav-btn.active .nav-label {
+  color: #fef08a;
+  font-size: 11.5px;
+}
+
+/* ===========================
+   Splash Screen (Screenshot 9 Sunny Forest)
+   =========================== */
+.splash-screen {
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 26px) 18px
+    calc(env(safe-area-inset-bottom, 0px) + 34px);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(254, 240, 138, 0.25) 0%, transparent 55%),
+    url('/assets/bg/forest-sun.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+.splash-logo-wrap,
+.splash-stump-scene,
+.splash-actions {
+  position: relative;
+  z-index: 2;
+}
+
+.splash-logo-img {
+  width: min(306px, 84vw);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+}
+
+.splash-stump-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.splash-trio {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: -36px;
+}
+
+.splash-trio img {
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 98%);
+}
+
+.hero-left {
+  transform: translate(16px, 12px);
+}
+
+.hero-center {
+  z-index: 3;
+  transform: translateY(8px);
+}
+
+.hero-right {
+  transform: translate(-16px, 12px);
+}
+
+.mossy-stump {
+  width: 242px;
+  padding: 14px 20px 22px;
+  border-radius: 50% / 38%;
+  background: radial-gradient(ellipse at 50% 34%, #ecc086 0%, #c4884c 64%, #6d411c 100%);
+  border: 4px solid #3f9c2c;
+  box-shadow:
+    inset 0 0 0 2px rgba(254, 243, 199, 0.4),
+    0 20px 0 #5b3719,
+    0 28px 24px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+.stump-gems-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  justify-items: center;
+}
+
+.splash-play-btn {
+  font-size: 17px;
+  padding: 13px 46px;
+}
+
+/* ===========================
+   Legend Screen (Screenshot 3 Parity)
+   =========================== */
+.legend-screen {
+  background: #473324;
+  min-height: 100%;
+}
+
+.lineup-stage {
+  position: relative;
+  background: url('/assets/bg/formation-bg.png') center 70%/cover no-repeat;
+  padding-top: 48px;
+}
+
+.stage-meadow {
+  padding: 8px 6px 4px;
+}
+
+.stage-sprites {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  min-height: 86px;
+  align-items: end;
+  justify-items: center;
+}
+
+.stage-unit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.unit-ground-shadow {
+  width: 48px;
+  height: 14px;
+  margin-top: -10px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.stage-ghost {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.48);
+  margin-bottom: 10px;
+}
+
+.lineup-wood-shelf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 10px 7px;
+  background: linear-gradient(180deg, #98653b 0%, #764a26 70%, #5c3619 100%);
+  border-top: 2px solid #c58d59;
+  border-bottom: 2px solid #3f220d;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.lineup-slots-wave {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.slot-coin {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #b57c4b;
+  background: radial-gradient(circle at 35% 30%, #7b4e29, #4a2a11);
+  color: #fde68a;
+  font-size: 13px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transform: translateY(-3px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+}
+
+.slot-coin.stagger-down {
+  transform: translateY(5px);
+}
+
+.slot-coin.filled {
+  border-color: #fbbf24;
+  background: radial-gradient(circle at 35% 30%, #fde047, #d97706);
+  color: #451a03;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.65);
+}
+
+.slot-coin.active {
+  border-color: #86efac;
+  box-shadow: 0 0 0 2px #4ade80, 0 0 12px rgba(74, 222, 128, 0.8);
+}
+
+.slot-coin.locked {
+  opacity: 0.52;
+  filter: grayscale(0.45);
+  border-color: #7c5636;
+  cursor: not-allowed;
+}
+
+.shelf-power-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(24, 15, 8, 0.72);
+  border: 1.5px solid #a67042;
+  border-radius: 99px;
+  padding: 2px 9px 2px 5px;
+  color: #fef08a;
+  font-size: 13px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #000;
+}
+
+.formation-vine-divider {
+  display: block;
+  width: 100%;
+  height: 16px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.stage-hint {
+  margin: 0;
+  padding: 3px 8px 6px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #e7d9c4;
+  background: #473324;
+  text-shadow: 0 1px 2px #000;
+}
+
+.legend-collection-deck {
+  flex: 1;
+  background:
+    linear-gradient(180deg, rgba(64, 43, 28, 0.55), rgba(48, 32, 20, 0.92)),
+    url('/assets/ui/card-wood-bg.png') center top / cover no-repeat;
+  padding: 6px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.filter-pill {
+  border: 1.5px solid #7c5638;
+  background: rgba(34, 21, 13, 0.72);
+  color: #f3e8d2;
+  border-radius: 99px;
+  padding: 5px 4px;
+  font-weight: 900;
+  font-size: 11.5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.filter-pill.active {
+  background: linear-gradient(180deg, #e5ba76 0%, #c48c46 100%);
+  color: #3f2204;
+  border-color: #fef3c7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 6px;
+}
+
+/* Flush borderless official Legend card (NO outer white frame!) */
+.legend-card {
+  position: relative;
+  aspect-ratio: 248 / 264;
+  cursor: pointer;
+  background: transparent;
+  transition: transform 0.1s ease;
+}
+
+.legend-card:active {
+  transform: scale(0.96);
+}
+
+.legend-card.locked {
+  filter: grayscale(0.65) brightness(0.75);
+}
+
+.card-art-flush {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.card-art-flush img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.48));
+}
+
+.card-cost-badge {
+  position: absolute;
+  top: -3px;
+  right: 1px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+}
+
+.card-cost-badge b {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px #000, 0 0 4px #1e3a8a;
+  margin-top: 2px;
+}
+
+.card-cost-badge img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-cost-badge.small {
+  width: 24px;
+  height: 24px;
+}
+
+.card-cost-badge.small b {
+  font-size: 10px;
+}
+
+.card-lineup-badge {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  background: linear-gradient(180deg, #4ade80, #16a34a);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 1px 5px;
+  border-radius: 6px;
+  border: 1px solid #fff;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.upgrade-arrow-img {
+  position: absolute;
+  right: 2px;
+  bottom: 18px;
+  width: 22px;
+  height: 22px;
+  z-index: 4;
+  animation: bob 1.4s ease-in-out infinite;
+}
+
+.card-overlay-footer {
+  position: absolute;
+  left: 4px;
+  right: 6px;
+  bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 3;
+}
+
+.card-paw-lv-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  background: rgba(25, 16, 10, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 99px;
+  padding: 0 5px 0 2px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.shard-bar {
+  flex: 1;
+  height: 7px;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 99px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.shard-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #4ade80, #84cc16);
+}
+
+.card-lock-ico {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================
+   Match Lobby (Sunlit Sanctuary + Carved Wood Cards)
+   =========================== */
+.match-lobby {
+  min-height: 100%;
+  background: linear-gradient(180deg, #74cbe2 0%, #99df92 38%, #473324 100%);
+  padding: 46px 10px 14px;
+  gap: 9px;
+}
+
+.lobby-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lobby-chip {
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  border-radius: 99px;
+  padding: 4px 8px;
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.28);
+}
+
+.lobby-chip.social {
+  background: linear-gradient(180deg, #fde047, #d97706);
+  color: #451a03;
+}
+
+.lobby-chip.perks {
+  background: linear-gradient(180deg, #f472b6, #db2777);
+}
+
+.lobby-chip.event {
+  background: linear-gradient(180deg, #38bdf8, #0284c7);
+}
+
+.world-ticker {
+  flex: 1;
+  min-width: 0;
+  background: rgba(15, 23, 42, 0.55);
+  color: #f8fafc;
+  border-radius: 99px;
+  padding: 4px 8px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.world-ticker-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.world-badge {
+  background: #eab308;
+  color: #422006;
+  font-weight: 900;
+  font-size: 9px;
+  border-radius: 5px;
+  padding: 1px 4px;
+}
+
+.lobby-ribbons {
+  display: flex;
+  gap: 4px;
+}
+
+.lotus-sanctuary-card {
+  position: relative;
+  border-radius: 18px;
+  padding: 12px 12px 10px;
+  background:
+    linear-gradient(180deg, rgba(16, 46, 28, 0.15) 0%, rgba(16, 46, 28, 0.55) 100%),
+    url('/assets/bg/arena-top.jpg') center bottom/cover no-repeat;
+  border: 2.5px solid #d49a6a;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.lotus-pedestal {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.portal-pedestal-img {
+  position: absolute;
+  bottom: -4px;
+  width: 176px;
+  height: 54px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.sanctuary-heroes {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding-bottom: 10px;
+}
+
+.ladder-strip {
+  background: rgba(24, 15, 8, 0.78);
+  color: #fff;
+  border: 1px solid #b57c4b;
+  border-radius: 10px;
+  padding: 6px 9px;
+}
+
+.ladder-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.ladder-meta strong {
+  color: #fde047;
+}
+
+.ladder-track {
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.ladder-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #fbbf24);
+  border-radius: 99px;
+}
+
+.sanctuary-cta-row {
+  margin-top: 8px;
+}
+
+.btn-match-now {
+  width: 100%;
+  border: 2px solid #fef08a;
+  border-radius: 99px;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  background: linear-gradient(180deg, #6ee732, #16a34a);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.5), 0 4px 0 #14532d;
+  cursor: pointer;
+}
+
+.lobby-notice {
+  margin: 6px 0 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fef08a;
+  text-shadow: 0 1px 2px #000;
+}
+
+.mode-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Warm Carved Wood & Cream Parchment Mode Panels */
+.mode-card {
+  background: linear-gradient(180deg, #faf0d7 0%, #edd9b4 100%);
+  color: #451a03;
+  border: 3px solid #8d582e;
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: inset 0 0 0 1.5px #fef9c3, 0 4px 10px rgba(0, 0, 0, 0.32);
+}
+
+.mode-card.featured {
+  border-color: #b45309;
+}
+
+.mode-card h3 {
+  margin: 0 0 3px;
+  font-size: 15px;
+  color: #78350f;
+}
+
+.mode-card p {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  color: #5c3a1e;
+}
+
+.preset-row,
+.online-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ws-input,
+.code-input {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1.5px solid #b57c4b;
+  border-radius: 9px;
+  color: #3f2204;
+  padding: 7px 9px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ws-input {
+  width: 100%;
+  margin-bottom: 7px;
+}
+
+.code-input {
+  width: 80px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.room-code-box {
+  margin-top: 8px;
+  padding: 7px;
+  border-radius: 10px;
+  background: #78350f;
+  color: #fef08a;
+  border: 1.5px dashed #fde047;
+  text-align: center;
+  font-weight: 900;
+}
+
+.online-status {
+  margin: 6px 0 0;
+  color: #9a3412 !important;
+  font-weight: 800;
+}
+
+/* ===========================
+   Live Battle Arena (Screenshots 1 & 8 Fullscreen Match)
+   =========================== */
+.battle-screen {
+  height: 100%;
+  background: url('/assets/bg/battle-full.jpg') center top / 100% 100% no-repeat;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 0px) + 5px) 0
+    calc(env(safe-area-inset-bottom, 0px) + 5px);
+  gap: 3px;
+}
+
+.arena-stage {
+  padding: 0 6px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 158px;
+}
+
+.hud-wings {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 4px;
+}
+
+.wing-ribbon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px;
+  border-radius: 11px;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.wing-ribbon.left {
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.88), rgba(14, 165, 233, 0.82));
+}
+
+.wing-ribbon.right {
+  background: linear-gradient(225deg, rgba(190, 18, 60, 0.88), rgba(249, 115, 22, 0.82));
+}
+
+.wing-ribbon.active-turn {
+  box-shadow: 0 0 0 2px #fde047, 0 4px 12px rgba(253, 224, 71, 0.6);
+}
+
+.wing-avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.35);
+  display: grid;
+  place-items: center;
+}
+
+.wing-stats {
+  flex: 1;
+  min-width: 0;
+}
+
+.wing-top-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.wing-name {
+  font-size: 9.5px;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wing-score {
+  font-size: 13px;
+  font-weight: 900;
+  color: #fef08a;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.hp-track {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.hp-fill {
+  height: 100%;
+  transition: width 0.25s ease;
+}
+
+.hp-fill.player {
+  background: linear-gradient(90deg, #22c55e, #86efac);
+}
+
+.hp-fill.enemy {
+  background: linear-gradient(90deg, #f97316, #ef4444);
+}
+
+.wing-hp-text {
+  display: block;
+  margin-top: 1px;
+  font-size: 8.5px;
+  font-weight: 800;
+}
+
+.score-float-pop {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fde047;
+  color: #7c2d12;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 1px 7px;
+  border-radius: 99px;
+  border: 1.5px solid #fff;
+  animation: scorePopFloat 0.9s ease-out forwards;
+  z-index: 6;
+}
+
+@keyframes scorePopFloat {
+  0% { opacity: 0; transform: translate(-50%, 6px) scale(0.8); }
+  30% { opacity: 1; transform: translate(-50%, 0) scale(1.08); }
+  100% { opacity: 0; transform: translate(-50%, -12px) scale(0.95); }
+}
+
+.round-star-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.round-star-badge {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+}
+
+.round-star-badge img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.round-star-badge strong {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 900;
+  color: #451a03;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.btn-exit {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(15, 23, 42, 0.65);
+  color: #fde68a;
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.arena-fighters {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 4px 12px;
+  position: relative;
+}
+
+.squad-cluster {
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.22s ease;
+  position: relative;
+}
+
+.squad-cluster.lunge-right {
+  transform: translateX(18px);
+}
+
+.squad-cluster.lunge-left {
+  transform: translateX(-18px);
+}
+
+.squad-cluster > * {
+  margin-left: -12px;
+}
+
+.squad-cluster > *:first-child {
+  margin-left: 0;
+}
+
+.combat-bolts {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 90px;
+  height: 28px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.fx-bolt {
+  position: absolute;
+  width: 24px;
+  height: 14px;
+  border-radius: 99px;
+}
+
+.combat-bolts.fly-right .fx-bolt.primary {
+  top: 0;
+  background: radial-gradient(circle, #e0f2fe 20%, #38bdf8 65%, transparent 100%);
+  box-shadow: 0 0 12px #38bdf8;
+  animation: flyRight 0.24s ease-out infinite;
+}
+
+.combat-bolts.fly-right .fx-bolt.secondary {
+  bottom: 0;
+  background: radial-gradient(circle, #fef08a 20%, #f97316 65%, transparent 100%);
+  box-shadow: 0 0 12px #fb923c;
+  animation: flyRight 0.24s 0.08s ease-out infinite;
+}
+
+.combat-bolts.fly-left .fx-bolt.primary {
+  top: 2px;
+  background: radial-gradient(circle, #fef08a 20%, #ef4444 65%, transparent 100%);
+  box-shadow: 0 0 12px #f97316;
+  animation: flyLeft 0.24s ease-out infinite;
+}
+
+.combat-bolts.fly-left .fx-bolt.secondary {
+  bottom: 0;
+  background: radial-gradient(circle, #e0f2fe 20%, #a855f7 65%, transparent 100%);
+  box-shadow: 0 0 12px #c084fc;
+  animation: flyLeft 0.24s 0.08s ease-out infinite;
+}
+
+@keyframes flyRight {
+  from { left: 0; opacity: 1; transform: scale(0.9); }
+  to { left: 66px; opacity: 0.2; transform: scale(1.25); }
+}
+
+@keyframes flyLeft {
+  from { right: 0; opacity: 1; transform: scale(0.9); }
+  to { right: 66px; opacity: 0.2; transform: scale(1.25); }
+}
+
+.fighter-emote-bubble {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #0f172a;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 2px solid #f59e0b;
+  white-space: nowrap;
+  z-index: 7;
+}
+
+.legend-sprite-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legend-shield-badge {
+  position: absolute;
+  right: -3px;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 0 6px #fde047);
+}
+
+/* Grass Seam HUD Strip (Butterfly LV left | Fuse + Paws center | Score right) */
+.grass-seam-hud {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 0 8px;
+  z-index: 4;
+}
+
+.seam-butterfly-badge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 42px;
+  flex-shrink: 0;
+}
+
+.seam-butterfly-badge .level-num {
+  top: 0;
+  bottom: auto;
+  height: 36px;
+}
+
+.seam-xp {
+  font-size: 8.5px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+  margin-top: -3px;
+}
+
+.seam-turn-core {
+  flex: 1;
+  min-width: 0;
+  background: rgba(15, 29, 20, 0.72);
+  border: 1px solid rgba(167, 243, 208, 0.35);
+  border-radius: 12px;
+  padding: 3px 6px;
+}
+
+.seam-tools-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.mini-sprite-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.rule-pill-btn {
+  border: 1px solid #e9d5ff;
+  background: linear-gradient(180deg, #a855f7, #7e22ce);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 1px 6px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.paw-pips {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.paw-pip-img.spent {
+  opacity: 0.28;
+  filter: grayscale(1);
+}
+
+.paw-pip-img.active {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+.fuse-label {
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.fuse-label.p1 {
+  color: #7dd3fc;
+}
+
+.fuse-label.p2 {
+  color: #fda4af;
+}
+
+.fuse-track {
+  height: 6px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: visible;
+  padding: 1px;
+}
+
+.fuse-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.35s linear;
+}
+
+.fuse-fill.blue {
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+}
+
+.fuse-fill.red {
+  background: linear-gradient(90deg, #dc2626, #fb923c);
+}
+
+.fuse-spark {
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #fef08a;
+  box-shadow: 0 0 8px #fde047;
+}
+
+.callout-sub-line {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #fde68a;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.seam-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(15, 28, 20, 0.78);
+  border: 1.5px solid #d49a6a;
+  border-radius: 99px;
+  padding: 3px 8px 3px 5px;
+  color: #fef08a;
+  font-size: 12px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.emote-popover {
+  position: absolute;
+  top: 40px;
+  left: 44px;
+  display: flex;
+  gap: 5px;
+  background: rgba(15, 23, 42, 0.94);
+  border: 1.5px solid #fde047;
+  border-radius: 12px;
+  padding: 5px 7px;
+  z-index: 12;
+}
+
+.emote-choice {
+  border: none;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  background: #fef3c7;
+  color: #78350f;
+  cursor: pointer;
+}
+
+/* Match-3 Board inside Moss Hedge */
+.board-moss-stage {
+  position: relative;
+  padding: 2px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.extra-move-banner-img {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 148px;
+  height: auto;
+  z-index: 9;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.55));
+  animation: burstPop 0.28s ease-out;
+}
+
+.final-round-pill-img {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 124px;
+  height: auto;
+  z-index: 7;
+  pointer-events: none;
+  opacity: 0.92;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+}
+
+.puzzle-grid.targeting-board {
+  box-shadow: 0 0 0 2.5px #facc15, 0 0 18px rgba(250, 204, 21, 0.55);
+  cursor: crosshair;
+}
+
+.puzzle-grid.invalid-shake {
+  animation: gridShake 0.28s ease-in-out;
+}
+
+@keyframes gridShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.skill-chip.targeting {
+  box-shadow: 0 0 0 2px #fde047, 0 0 14px rgba(253, 224, 71, 0.85);
+  transform: translateY(-2px);
+}
+
+.puzzle-grid {
+  width: min(100%, 364px);
+  display: grid;
+  gap: 2px;
+  padding: 3px;
+  background: rgba(15, 38, 24, 0.42);
+  border-radius: 12px;
+  touch-action: none;
+  position: relative;
+}
+
+.gem-tile {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 8px;
+  background: url('/assets/ui/tile-a.png') center/cover no-repeat;
+  padding: 2px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.14s ease, filter 0.14s ease;
+}
+
+.gem-tile.checker-alt {
+  background-image: url('/assets/ui/tile-b.png');
+}
+
+.gem-tile.selected {
+  box-shadow: 0 0 0 2.5px #fde047 inset, 0 0 12px rgba(253, 224, 71, 0.8);
+  transform: scale(1.06);
+  filter: brightness(1.18);
+}
+
+.gem-tile.clearing {
+  transform: scale(1.18);
+  filter: brightness(1.35);
+  box-shadow: 0 0 0 2.5px #fef08a inset, 0 0 16px #facc15;
+}
+
+.gem-tile.hint-pair {
+  animation: hintPulse 1.05s ease-in-out infinite;
+  box-shadow: inset 0 0 0 2px #fef08a, 0 0 10px rgba(253, 224, 71, 0.9);
+}
+
+@keyframes hintPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.gem-svg {
+  width: 92%;
+  height: 92%;
+}
+
+.good-callout-burst {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.callout-plaque-img {
+  width: 186px;
+  height: auto;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.65));
+  animation: burstPop 0.25s ease-out;
+}
+
+@keyframes burstPop {
+  from { transform: scale(0.5); opacity: 0.4; }
+  to { transform: scale(1.06); opacity: 1; }
+}
+
+/* Bottom 9-Orb Energy Pool + Framed Skill Medallions */
+.energy-battle-dock {
+  margin: 0 8px;
+  background: linear-gradient(180deg, rgba(64, 34, 14, 0.9), rgba(38, 20, 8, 0.95));
+  border: 2px solid #9d6839;
+  border-radius: 14px;
+  padding: 5px 7px;
+}
+
+.energy-orb-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.orb-side {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.orb-count-pill {
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 99px;
+}
+
+.orb-count-pill.blue {
+  background: #0284c7;
+}
+
+.orb-count-pill.red {
+  background: #be123c;
+}
+
+.orb-dots {
+  display: flex;
+  gap: 2.5px;
+}
+
+.energy-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.energy-dot.blue.filled {
+  background: #38bdf8;
+  border-color: #e0f2fe;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+.energy-dot.red.filled {
+  background: #fb7185;
+  border-color: #ffe4e6;
+  box-shadow: 0 0 6px #fb7185;
+}
+
+.skill-dock {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+}
+
+.skill-chip {
+  flex: 1 0 auto;
+  min-width: 84px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(20, 38, 25, 0.88);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 3px 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.skill-chip.ready {
+  border-color: #fde047;
+  background: linear-gradient(135deg, #5c2e08, #854d0e);
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+}
+
+.skill-medallion-wrap {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.skill-meta {
+  flex: 1;
+  text-align: left;
+  font-size: 9.5px;
+  font-weight: 800;
+  min-width: 0;
+}
+
+.mana-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.mana-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #fde047);
+}
+
+.skill-drop-cost {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.skill-drop-cost img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.skill-drop-cost b {
+  position: relative;
+  z-index: 1;
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+
+/* ===========================
+   Store & 3x3 Collect Showcase (Screenshots 2 & 7)
+   =========================== */
+.store-screen {
+  min-height: 100%;
+  background: #473324;
+  gap: 8px;
+}
+
+.store-awning-hero {
+  background:
+    linear-gradient(180deg, rgba(16, 10, 6, 0.35), rgba(32, 20, 12, 0.72)),
+    url('/assets/bg/shop-bg.jpg') center/cover no-repeat;
+  padding: 50px 14px 14px;
+  border-bottom: 3px solid #b57c4b;
+}
+
+.store-awning-title {
+  text-align: center;
+}
+
+.store-awning-title h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #fef08a;
+  text-shadow: 0 2px 0 #451a03;
+}
+
+.store-awning-title p {
+  margin: 3px 0 0;
+  font-size: 11.5px;
+  color: #fef3c7;
+}
+
+.store-shelves-wrap {
+  padding: 2px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shelf-card {
+  position: relative;
+  background: linear-gradient(180deg, #faf0d7 0%, #ebd6ad 100%);
+  color: #451a03;
+  border: 3px solid #8c572d;
+  border-radius: 15px;
+  padding: 11px 12px 14px;
+  box-shadow: inset 0 0 0 1.5px #fef9c3, 0 5px 12px rgba(0, 0, 0, 0.35);
+}
+
+.shelf-card h3 {
+  margin: 0 0 3px;
+  font-size: 15px;
+  color: #78350f;
+}
+
+.shelf-card p {
+  margin: 0 0 9px;
+  font-size: 11.5px;
+  color: #5c3a1e;
+}
+
+.shelf-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 99px;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.shelf-tag.pink {
+  background: #db2777;
+}
+
+.shelf-tag.gold {
+  background: #d97706;
+}
+
+.pack-head-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 4px;
+}
+
+.pack-art-icon {
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.35));
+}
+
+.pack-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.shelf-plank-bar {
+  display: block;
+  width: calc(100% + 16px);
+  margin: 8px -8px -10px;
+  height: 16px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.shelf-pair-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.shelf-card.compact {
+  padding: 9px;
+}
+
+.shelf-card.compact .btn-primary,
+.shelf-card.compact .btn-secondary {
+  padding: 7px 8px;
+  font-size: 11px;
+}
+
+/* Fullscreen Sky-Mint 3x3 Collect Overlay */
+.summon-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  background: url('/assets/bg/cup-sky.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0;
+  z-index: 40;
+}
+
+.summon-showcase {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 38px);
+}
+
+.collect-grid {
+  width: 100%;
+  padding: 0 14px;
+  margin-bottom: auto;
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 10px;
+}
+
+.collect-slot {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.collect-slot.spotlight {
+  z-index: 4;
+}
+
+.sunburst-behind-img {
+  position: absolute;
+  width: 170%;
+  height: 170%;
+  object-fit: contain;
+  z-index: 0;
+  pointer-events: none;
+  animation: burstPop 0.35s ease-out;
+}
+
+.collect-card-flush {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.collect-card-flush.spotlight-card {
+  transform: scale(1.13);
+}
+
+.new-pill {
+  position: absolute;
+  top: -6px;
+  left: -4px;
+  z-index: 4;
+  background: linear-gradient(135deg, #d946ef, #9333ea);
+  color: #fde047;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 7px;
+  border: 1.5px solid #fff;
+  transform: rotate(-10deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.collect-bottom-overlay {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+}
+
+.collect-lv {
+  font-size: 11px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 0 #000, 0 -1px 0 #000, 1px 0 0 #000, -1px 0 0 #000;
+}
+
+.wood-arch-banner {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, #ab6e3f 0%, #7c4923 65%, #5b3316 100%);
+  border-top: 4px solid #d49a6a;
+  border-top-left-radius: 56px 26px;
+  border-top-right-radius: 56px 26px;
+  padding: 20px 16px calc(env(safe-area-inset-bottom, 0px) + 22px);
+  text-align: center;
+  box-shadow: inset 0 2px 0 rgba(254, 243, 199, 0.35), 0 -4px 18px rgba(0, 0, 0, 0.32);
+}
+
+.arch-vine-img {
+  position: absolute;
+  top: -22px;
+  left: 8px;
+  width: 150px;
+  height: auto;
+  pointer-events: none;
+}
+
+.wood-arch-banner h3 {
+  margin: 0 0 10px;
+  color: #fef08a;
+  font-size: 22px;
+  text-shadow: 0 2px 0 #451a03;
+}
+
+/* ===========================
+   Spin Wheel Overlay (Screenshot 4 Parity)
+   =========================== */
+.wheel-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 18, 10, 0.72);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 45;
+}
+
+.wheel-stage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 100dvh;
+  background: url('/assets/bg/wheel-bg.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 0px) + 38px) 14px
+    calc(env(safe-area-inset-bottom, 0px) + 14px);
+}
+
+.wheel-close-btn {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 10px);
+  right: 12px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.wheel-hero-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wheel-guardian-header {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: -44px;
+  z-index: 4;
+}
+
+.wf-left {
+  transform: translate(18px, -6px);
+}
+
+.wf-right {
+  transform: translate(-18px, -6px);
+}
+
+.wheel-wrap {
+  position: relative;
+  width: 288px;
+  height: 288px;
+  display: grid;
+  place-items: center;
+}
+
+.wheel-rim-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.wheel-disc {
+  width: 244px;
+  height: 244px;
+  border-radius: 50%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 2;
+  transition: transform 2.35s cubic-bezier(0.16, 0.85, 0.25, 1);
+}
+
+.wheel-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-top: 10px;
+}
+
+.wheel-label span {
+  font-size: 9px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px #000, 0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+.wheel-center-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: auto;
+  transform: translate(-50%, -62%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.wheel-result {
+  background: #422006;
+  border: 1.5px solid #fde047;
+  color: #fef08a;
+  font-weight: 900;
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 12.5px;
+}
+
+.wheel-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.wheel-free-ad-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #000;
+  cursor: pointer;
+}
+
+.wheel-spin-main {
+  font-size: 17px;
+  padding: 10px 44px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.65), 0 4px 0 #a16207, 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+.wheel-ticket-ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.wheel-ticket-ring b {
+  position: absolute;
+  bottom: -4px;
+  background: #14532d;
+  color: #fef08a;
+  border: 1px solid #86efac;
+  border-radius: 99px;
+  padding: 0 5px;
+  font-size: 10px;
+}
+
+.wheel-footer h3 {
+  margin: 0;
+}
+
+/* ===========================
+   Tournament Screen (Screenshot 6 Wooden Parchment Bulletin Board)
+   =========================== */
+.tournament-screen {
+  min-height: 100%;
+  background: url('/assets/bg/cup-sky.jpg') center/cover no-repeat;
+  padding: 46px 8px 10px;
+  gap: 8px;
+}
+
+.wooden-bulletin-board {
+  position: relative;
+  background: linear-gradient(180deg, #b87b4b 0%, #8e562b 100%);
+  border: 3px solid #6b3c19;
+  border-top-width: 14px;
+  border-bottom-width: 10px;
+  border-radius: 16px;
+  padding: 7px;
+  margin-top: 6px;
+  box-shadow: inset 0 2px 0 rgba(254, 243, 199, 0.35), 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.board-top-vines {
+  position: absolute;
+  top: -22px;
+  left: 8px;
+  width: 152px;
+  height: auto;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.bulletin-parchment {
+  position: relative;
+  background: linear-gradient(180deg, #fbf4e4 0%, #f5e6c8 100%);
+  color: #451a03;
+  border-radius: 10px;
+  padding: 14px 8px 10px;
+  border: 1.5px solid #d1b387;
+}
+
+.rivet {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e2e8f0, #64748b);
+  border: 1px solid #334155;
+}
+
+.rivet.tl { top: 5px; left: 5px; }
+.rivet.tr { top: 5px; right: 5px; }
+.rivet.bl { bottom: 5px; left: 5px; }
+.rivet.br { bottom: 5px; right: 5px; }
+
+.bracket-empty {
+  text-align: center;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bracket-intro {
+  margin: 0;
+  font-size: 13px;
+  color: #78350f;
+}
+
+.bracket-rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.brown-ribbon-hdr {
+  align-self: center;
+  background: linear-gradient(180deg, #985e34, #703e1a);
+  color: #fef3c7;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 18px;
+  border-radius: 99px;
+  border: 1.5px solid #d49a6a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.qf-grid,
+.sf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 6px;
+}
+
+.vs-pair-clean {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2px;
+}
+
+.vs-pair-clean.final-pair {
+  justify-content: center;
+  gap: 18px;
+}
+
+.medallion-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  width: 56px;
+}
+
+.med-score {
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 0 #451a03, 0 -1px 0 #451a03, 1px 0 0 #451a03, -1px 0 0 #451a03;
+}
+
+.med-circle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+
+.med-portrait-clip {
+  width: 82%;
+  height: 82%;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.med-circle.empty {
+  border-radius: 50%;
+  background: rgba(120, 53, 15, 0.14);
+  border: 2px dashed #b45309;
+  color: #92400e;
+  font-weight: 900;
+}
+
+.med-ring-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.med-champ-sun {
+  position: absolute;
+  width: 175%;
+  height: 175%;
+  object-fit: contain;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.med-trophy-pin {
+  position: absolute;
+  left: -3px;
+  bottom: -2px;
+  z-index: 3;
+}
+
+.med-star-pin {
+  position: absolute;
+  right: -3px;
+  bottom: -2px;
+  z-index: 3;
+}
+
+.med-name {
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #5c3a1e;
+  max-width: 58px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.medallion-node.winner .med-name,
+.medallion-node.is-player .med-name {
+  color: #fde047;
+  text-shadow: 0 1px 0 #7c2d12, 0 -1px 0 #7c2d12, 1px 0 0 #7c2d12, -1px 0 0 #7c2d12;
+}
+
+.champ-wins-text {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 900;
+  color: #fde047;
+  text-shadow: 0 2px 0 #9a3412, -1px -1px 0 #9a3412, 1px -1px 0 #9a3412;
+}
+
+.bracket-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.cup-ladder-compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.trial-chip-card {
+  background: linear-gradient(180deg, #faf0d7, #e8d2ab);
+  border: 2px solid #8c572d;
+  border-radius: 12px;
+  padding: 6px 4px;
+  color: #451a03;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.trial-chip-card strong {
+  font-size: 10.5px;
+}
+
+.trial-chip-card small {
+  font-size: 10px;
+  color: #9a3412;
+  font-weight: 800;
+}
+
+.cup-stage {
+  background: #d97706;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 1px 6px;
+  border-radius: 99px;
+}
+
+/* ===========================
+   Island Screen (Screenshot 5 Full-Bleed Park)
+   =========================== */
+.island-screen {
+  height: 100%;
+}
+
+.island-full-canvas {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  background: url('/assets/bg/island-map.jpg') center/cover no-repeat;
+  overflow: hidden;
+}
+
+.island-backdrop-map,
+.island-backdrop-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.island-backdrop-map {
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.island-backdrop-scene {
+  z-index: 1;
+  opacity: 0.16;
+}
+
+.island-building-spine {
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
+}
+
+.island-hud-overlay {
+  position: relative;
+  z-index: 6;
+  padding: 46px 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.island-hud-left,
+.island-hud-right {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: auto;
+}
+
+.player-avatar-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(15, 25, 20, 0.56);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 99px;
+  padding: 2px 10px 2px 3px;
+}
+
+.avatar-ring-sm {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+}
+
+.star-counters {
+  display: flex;
+  flex-direction: column;
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #fef08a;
+  line-height: 1.15;
+}
+
+.star-counters span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.island-social-stack {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.island-social-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #000;
+  padding: 0;
+  cursor: pointer;
+}
+
+.island-chat-feed {
+  background: rgba(15, 23, 42, 0.55);
+  border-radius: 9px;
+  padding: 3px 7px;
+  font-size: 10px;
+  color: #f8fafc;
+  line-height: 1.3;
+}
+
+.island-chat-feed b {
+  color: #fde047;
+}
+
+.island-overview-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #000;
+  padding: 0;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.island-overview-badge b {
+  color: #fde047;
+  margin-top: -1px;
+}
+
+.island-harvest-pill {
+  border: 1.5px solid #fef08a;
+  background: linear-gradient(180deg, #22c55e, #15803d);
+  color: #fff;
+  border-radius: 99px;
+  padding: 3px 9px;
+  font-size: 10.5px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.map-landmark-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 4;
+  transition: transform 0.14s ease;
+}
+
+.map-landmark-pin:active {
+  transform: translate(-50%, -50%) scale(0.94);
+}
+
+.building-sprite {
+  filter: drop-shadow(0 5px 7px rgba(0, 0, 0, 0.48));
+}
+
+.map-tag {
+  margin-top: -6px;
+  background: rgba(24, 15, 8, 0.84);
+  color: #fef3c7;
+  border: 1px solid #d49a6a;
+  border-radius: 99px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.map-empty-pin {
+  animation: bob 1.8s ease-in-out infinite;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+}
+
+.park-roamer {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.park-roamer.r1 {
+  left: 44%;
+  top: 52%;
+}
+
+.park-roamer.r2 {
+  left: 60%;
+  top: 47%;
+}
+
+.island-drawer {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 15;
+  background: linear-gradient(180deg, #faf0d7, #ead3aa);
+  color: #451a03;
+  border: 3px solid #8c572d;
+  border-radius: 15px;
+  padding: 9px 10px;
+  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.45);
+}
+
+.drawer-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.drawer-hdr button {
+  border: none;
+  background: #78350f;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.decor-catalog-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.decor-choice {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1.5px solid #b57c4b;
+  color: #451a03;
+  border-radius: 9px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.decor-choice strong {
+  color: #b45309;
+}
+
+.nodes-compact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.node-row-compact {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid #b57c4b;
+  border-radius: 10px;
+  padding: 5px 6px;
+}
+
+.node-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.node-info b {
+  font-size: 11.5px;
+}
+
+.node-info small {
+  font-size: 9.5px;
+  color: #78350f;
+}
+
+.node-info select {
+  font-size: 10px;
+  border-radius: 6px;
+  border: 1px solid #b57c4b;
+  background: #fffbeb;
+  color: #451a03;
+}
+
+.node-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.node-btns button {
+  padding: 4px 8px;
+  font-size: 10px;
+}
+
+/* ===========================
+   Modals & Utilities
+   =========================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 14, 9, 0.76);
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  z-index: 40;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 356px;
+  background: linear-gradient(180deg, #1b3b28, #102418);
+  color: #fff;
+  border: 2.5px solid #fde047;
+  border-radius: 18px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-card.wood-modal {
+  background: linear-gradient(180deg, #faf0d7 0%, #ead3aa 100%);
+  color: #451a03;
+  border: 3px solid #8c572d;
+}
+
+.modal-card.wood-modal .stats-strip,
+.modal-card.wood-modal .skill-box {
+  background: rgba(120, 53, 15, 0.1);
+}
+
+.modal-card.wood-modal .skill-box p,
+.modal-card.wood-modal .modal-subtitle {
+  color: #5c3a1e;
+}
+
+.modal-card.wood-modal .modal-rarity {
+  color: #b45309;
+}
+
+.modal-card.wood-modal .stats-strip small {
+  color: #78350f;
+}
+
+.modal-card.wood-modal .btn-slot {
+  background: rgba(120, 53, 15, 0.25);
+  color: #451a03;
+}
+
+.modal-card.wood-modal .btn-slot.active {
+  background: #16a34a;
+  color: #fff;
+}
+
+.modal-card.wood-modal .btn-slot:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.modal-card.wood-modal .btn-ghost {
+  background: #78350f;
+  color: #fef3c7;
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-head h3 {
+  margin: 2px 0;
+}
+
+.modal-rarity {
+  font-size: 11px;
+  color: #fde047;
+  font-weight: 800;
+}
+
+.modal-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: #bbf7d0;
+}
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 7px 6px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.upgrade-gain-line {
+  font-size: 11px;
+  font-weight: 800;
+  color: #15803d;
+  text-align: center;
+  margin: -2px 0 0;
+}
+
+.stats-strip small {
+  display: block;
+  font-size: 10px;
+  color: #86efac;
+}
+
+.skill-box {
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.skill-box p {
+  margin: 4px 0 0;
+  color: #e2e8f0;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-assign-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+.btn-slot {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 7px;
+  padding: 5px 2px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.victory-modal {
+  text-align: center;
+}
+
+.result-banner-img {
+  width: 215px;
+  max-width: 85%;
+  height: auto;
+  margin: 0 auto 2px;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.reward-line {
+  color: #fde047;
+  font-weight: 800;
+}
+
+.locked-hint {
+  margin: 0;
+  font-size: 12px;
+  color: #78350f;
+}
+
+.modal-card:not(.wood-modal) .locked-hint,
+.rules-list {
+  color: #e2e8f0;
+}
+
+.rules-list {
+  margin: 6px 0 10px;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.guide-gem-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin: 8px 0;
+  text-align: center;
+}
+
+.guide-gem-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #e2e8f0;
+}
+
+.toast-error {
+  margin: 0 10px;
+  background: #991b1b;
+  color: #fee2e2;
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.bob-anim {
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+/* ===========================
+   APK Live Parity: Spine, Splash, Lobby, Store, Battle VFX
+   =========================== */
+.spine-canvas-box {
+  display: inline-block;
+  vertical-align: middle;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.apk-splash {
+  background:
+    radial-gradient(circle at 50% 65%, rgba(250, 204, 21, 0.2) 0%, transparent 58%),
+    url('/assets/bg/splash-bg.jpg') center/cover no-repeat;
+}
+
+.apk-splash .splash-logo-wrap {
+  margin-top: 10px;
+}
+
+.splash-fireflies {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  pointer-events: none;
+}
+
+.splash-fireflies span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fef08a 0%, #facc15 55%, transparent 100%);
+  box-shadow: 0 0 12px 3px rgba(254, 240, 138, 0.85);
+  animation: fireflyFloat 3.6s ease-in-out infinite alternate;
+}
+
+.splash-fireflies span:nth-child(1) { left: 16%; top: 24%; animation-delay: 0s; }
+.splash-fireflies span:nth-child(2) { left: 78%; top: 18%; animation-delay: 0.6s; }
+.splash-fireflies span:nth-child(3) { left: 32%; top: 64%; animation-delay: 1.2s; }
+.splash-fireflies span:nth-child(4) { left: 68%; top: 58%; animation-delay: 1.8s; }
+.splash-fireflies span:nth-child(5) { left: 48%; top: 38%; animation-delay: 2.3s; width: 6px; height: 6px; }
+.splash-fireflies span:nth-child(6) { left: 22%; top: 82%; animation-delay: 2.9s; width: 10px; height: 10px; }
+
+@keyframes fireflyFloat {
+  0% { transform: translate(0, 0) scale(0.8); opacity: 0.45; }
+  100% { transform: translate(10px, -18px) scale(1.2); opacity: 1; }
+}
+
+.apk-splash .splash-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.splash-update-track {
+  position: relative;
+  width: min(300px, 84%);
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.splash-bar-bg,
+.splash-bar-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 99px;
+}
+
+.splash-bar-fill {
+  padding: 2px;
+}
+
+.splash-bar-label {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.apk-login-btn {
+  position: relative;
+  width: 214px;
+  height: 54px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.45));
+  transition: transform 0.12s ease;
+}
+
+.apk-login-btn:active {
+  transform: scale(0.96);
+}
+
+.apk-login-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.apk-login-btn span {
+  position: relative;
+  z-index: 2;
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 3px rgba(20, 83, 45, 0.95);
+}
+
+.splash-version-tag {
+  position: relative;
+  z-index: 2;
+  margin-top: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.78);
+  text-shadow: 0 1px 2px #000;
+}
+
+/* APK Adventure Match Lobby */
+.apk-match-lobby {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  padding: 48px 8px 10px;
+  background:
+    linear-gradient(180deg, rgba(16, 40, 24, 0.25) 0%, rgba(16, 40, 24, 0.55) 100%),
+    url('/assets/bg/map_main_bg.png') center/cover no-repeat;
+  gap: 8px;
+}
+
+.lobby-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.world-ticker {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 99px;
+  padding: 4px 10px 4px 4px;
+  color: #fff;
+  font-size: 11px;
+}
+
+.world-badge {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 900;
+  font-size: 9.5px;
+  padding: 2px 7px;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+
+.world-ticker-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.lobby-icon-pill {
+  border: none;
+  background: rgba(15, 23, 42, 0.55);
+  border-radius: 10px;
+  padding: 4px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.lobby-stage-grid {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.lobby-side-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.rail-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #000;
+  padding: 0;
+  cursor: pointer;
+}
+
+.apk-match-lobby .lotus-sanctuary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 8px;
+}
+
+.opp-tier-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.tier-pill {
+  border: 1.5px solid #b57c4b;
+  background: rgba(24, 15, 8, 0.72);
+  color: #fde68a;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.tier-pill.active {
+  background: linear-gradient(180deg, #f59e0b, #b45309);
+  border-color: #fef08a;
+  color: #fff;
+}
+
+.lobby-bottom-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.apk-ladder-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(20, 14, 8, 0.72);
+  border: 1.5px solid #c28e5c;
+  border-radius: 99px;
+  padding: 4px 10px 4px 6px;
+}
+
+.apk-cup-badge {
+  flex-shrink: 0;
+}
+
+.apk-cup-track {
+  position: relative;
+  flex: 1;
+  height: 18px;
+  border-radius: 99px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.cup-track-bg,
+.cup-track-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.cup-track-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.cup-track-fill-wrap {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cup-track-text {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+
+.apk-battle-cta {
+  position: relative;
+  width: min(260px, 86%);
+  height: 54px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.45));
+}
+
+.apk-battle-cta:active {
+  transform: scale(0.97);
+}
+
+.apk-battle-cta-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.apk-battle-cta-label {
+  position: relative;
+  z-index: 2;
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(180deg, #4ade80, #16a34a);
+  border: 2px solid #fef08a;
+  padding: 5px 22px;
+  border-radius: 99px;
+  box-shadow: 0 3px 0 #14532d, 0 4px 10px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.friend-mode-box {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1.5px solid #c28e5c;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.friend-mode-box h4 {
+  margin: 0 0 3px;
+  font-size: 13.5px;
+  color: #78350f;
+}
+
+.friend-mode-box p {
+  margin: 0 0 7px;
+  font-size: 11px;
+  color: #5c3a1e;
+}
+
+/* Store APK Canopy + Portal + Animated Shopkeeper */
+.store-canopy-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.shop-portal-door {
+  width: 132px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: -44px;
+  filter: drop-shadow(0 4px 12px rgba(56, 189, 248, 0.45));
+}
+
+.shop-keeper-spine {
+  position: relative;
+  z-index: 2;
+  margin-bottom: -6px;
+}
+
+/* Battle HUD & Board APK VFX */
+.apk-rule-btn {
+  background:
+    url('/assets/ui/battle/btn_rulebg01.png') center/100% 100% no-repeat,
+    linear-gradient(180deg, #a855f7, #7e22ce);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.apk-time-pill {
+  background: url('/assets/ui/battle/img_time_bg.png') center/100% 100% no-repeat;
+  padding: 1px 7px;
+  border-radius: 8px;
+}
+
+.skill-spine-cutin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  z-index: 12;
+  pointer-events: none;
+  filter: drop-shadow(0 0 18px rgba(253, 224, 71, 0.85));
+  animation: skillCutInPop 0.9s ease-out forwards;
+}
+
+@keyframes skillCutInPop {
+  0% { opacity: 0; transform: translate(-50%, -45%) scale(0.75); }
+  20% { opacity: 1; transform: translate(-50%, -52%) scale(1.06); }
+  80% { opacity: 1; transform: translate(-50%, -52%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -58%) scale(1.1); }
+}
+
+.fighter-dmg-pop {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 14;
+  font-size: 16px;
+  font-weight: 900;
+  pointer-events: none;
+  text-shadow: 0 2px 3px #000, -1px -1px 0 #000, 1px -1px 0 #000;
+  animation: dmgFloatUp 0.95s ease-out forwards;
+}
+
+.fighter-dmg-pop.dmg { color: #fb7185; }
+.fighter-dmg-pop.heal { color: #4ade80; }
+.fighter-dmg-pop.shield { color: #38bdf8; }
+
+@keyframes dmgFloatUp {
+  0% { opacity: 0; transform: translate(-50%, 6px) scale(0.75); }
+  22% { opacity: 1; transform: translate(-50%, -6px) scale(1.15); }
+  100% { opacity: 0; transform: translate(-50%, -28px) scale(0.95); }
+}
+
+.gem-tile.falling {
+  animation: gemFallDrop 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes gemFallDrop {
+  0% { transform: translateY(-22px) scale(0.9); opacity: 0.65; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.board-apk-vfx {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 8;
+}
+
+.board-apk-vfx.boom {
+  animation: vfxBoomPop 0.38s ease-out forwards;
+}
+
+.board-apk-vfx.lightning {
+  width: 96px;
+  height: 96px;
+  animation: vfxLightningSweep 0.42s ease-out forwards;
+}
+
+@keyframes vfxBoomPop {
+  0% { transform: translate(-50%, -50%) scale(0.45); opacity: 0.9; }
+  50% { transform: translate(-50%, -50%) scale(1.22); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.45); opacity: 0; }
+}
+
+@keyframes vfxLightningSweep {
+  0% { transform: translate(-50%, -50%) scale(0.6) rotate(-12deg); opacity: 1; }
+  55% { transform: translate(-50%, -50%) scale(1.25) rotate(8deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.4) rotate(0deg); opacity: 0; }
+}
+
+.flying-mana-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.flying-orb-sprite {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  animation: flyManaOrb 0.48s ease-in forwards;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
+}
+
+.flying-orb-sprite:nth-child(2) { left: 38%; top: 54%; }
+.flying-orb-sprite:nth-child(3) { left: 62%; top: 52%; }
+.flying-orb-sprite:nth-child(4) { left: 44%; top: 40%; }
+.flying-orb-sprite:nth-child(5) { left: 56%; top: 60%; }
+
+@keyframes flyManaOrb {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+  45% { transform: translate(-50%, -130%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -260%) scale(0.4); opacity: 0; }
+}
+
+.wheel-fullscreen-overlay {
+  background:
+    radial-gradient(circle at center, rgba(6, 18, 10, 0.35), rgba(6, 18, 10, 0.85)),
+    url('/assets/ui/wheel/bg_daily_turntale01.png') center/cover no-repeat;
+}
+
+/* ===========================
+   APK Full Vietnamese UI Parity (57 Reference Screens)
+   =========================== */
+.apk-top-bar.mode-lobby {
+  background: linear-gradient(180deg, rgba(16, 22, 52, 0.85), rgba(16, 22, 52, 0.25));
+  padding: calc(env(safe-area-inset-top, 0px) + 6px) 8px 4px;
+}
+
+.apk-lobby-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.apk-avatar-ring {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.apk-avatar-head {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.apk-avatar-frame-overlay {
+  position: absolute;
+  inset: -4px;
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.apk-lobby-stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+}
+
+.apk-stat-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+
+.apk-menu-anchor {
+  position: relative;
+}
+
+.apk-menu-btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #86efac;
+  background: #1e293b;
+  color: #bbf7d0;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+}
+
+.apk-red-dot {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 1.5px solid #fff;
+}
+
+.apk-menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 38px;
+  width: 158px;
+  background: linear-gradient(180deg, #9a6941, #774d28);
+  border: 2.5px solid #f5d08a;
+  border-radius: 14px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 40;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55);
+}
+
+.apk-menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid #dcfce7;
+  background: linear-gradient(180deg, #8ee559, #54b936);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgba(20, 83, 45, 0.85);
+  border-radius: 99px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.apk-menu-item.has-dot::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+/* Home Lobby Event Strips & Gold CTA */
+.apk-event-banners-row {
+  display: grid;
+  grid-template-columns: 1.85fr 1fr;
+  gap: 6px;
+}
+
+.apk-banner-privilege {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border-radius: 10px;
+  border: 2px solid #e0e7ff;
+  background: linear-gradient(90deg, #6366f1 0%, #a855f7 45%, #fde047 100%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.apk-priv-pill {
+  background: rgba(88, 28, 135, 0.8);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+.apk-priv-lv {
+  background: #f59e0b;
+  color: #fff;
+  border-radius: 99px;
+  padding: 1px 6px;
+  font-size: 10px;
+}
+
+.apk-priv-days {
+  background: rgba(124, 45, 18, 0.75);
+  padding: 1px 6px;
+  border-radius: 99px;
+  font-size: 9.5px;
+}
+
+.apk-banner-activity {
+  position: relative;
+  border-radius: 10px;
+  border: 2px solid #fef08a;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #7c2d12;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.lobby-top-bar.world-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(15, 23, 42, 0.68);
+  border-radius: 10px;
+  padding: 4px 8px;
+  color: #fff;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.rail-icon-btn {
+  position: relative;
+}
+
+.rail-count-badge {
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 9px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid #fff;
+}
+
+.apk-shrine-stage {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(236, 72, 153, 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(88, 86, 214, 0.36), rgba(30, 58, 138, 0.45)),
+    url('/assets/bg/arena-top.jpg') center bottom/cover no-repeat;
+  border: 2px solid rgba(196, 181, 253, 0.65);
+}
+
+.apk-gold-match-btn {
+  border: 2.5px solid #fef9c3;
+  background: linear-gradient(180deg, #fde047 0%, #f59e0b 100%);
+  color: #fff;
+  font-size: 16.5px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #92400e;
+  border-radius: 99px;
+  padding: 9px 36px;
+  box-shadow: 0 4px 0 #b45309, 0 6px 14px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+.apk-gold-match-btn:active {
+  transform: translateY(2px);
+}
+
+.apk-streak-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(251, 146, 60, 0.65);
+  color: #fef08a;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 12px;
+  border-radius: 99px;
+}
+
+/* Wheel APK Upgrades */
+.wheel-top-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 12;
+}
+
+.wheel-rule-btn {
+  border: 1.5px solid #e9d5ff;
+  background: linear-gradient(180deg, #a855f7, #6d28d9);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.wheel-close-btn.inline {
+  position: static;
+}
+
+.wheel-controls-col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.apk-wheel-spin-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2.5px solid #fef9c3;
+  background: linear-gradient(180deg, #fde047, #f59e0b);
+  color: #fff;
+  border-radius: 99px;
+  padding: 6px 22px;
+  box-shadow: 0 4px 0 #b45309;
+  cursor: pointer;
+}
+
+.apk-wheel-spin-btn:disabled {
+  opacity: 0.55;
+}
+
+.apk-wheel-spin-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px #78350f;
+}
+
+.apk-wheel-ad-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.72);
+  border-radius: 99px;
+  padding: 5px 6px 5px 12px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.apk-unlock-mini-btn {
+  border: 1.5px solid #fef08a;
+  background: linear-gradient(180deg, #fde047, #eab308);
+  color: #78350f;
+  font-weight: 900;
+  font-size: 10.5px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.apk-rate-list {
+  margin: 6px 0;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* Store 3-Tab APK Shelf UI */
+.apk-shop-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px 8px;
+  background: #5d381b;
+  border-bottom: 2px solid #8c572d;
+}
+
+.apk-shop-tab {
+  border: 1.5px solid #a16207;
+  background: #7c2d12;
+  color: #fde68a;
+  font-size: 10.5px;
+  font-weight: 900;
+  padding: 6px 4px;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+}
+
+.apk-shop-tab.active {
+  background: linear-gradient(180deg, #fde047, #f59e0b);
+  color: #fff;
+  text-shadow: 0 1px 2px #78350f;
+}
+
+.apk-priv-shelf-card,
+.apk-month-card-box,
+.apk-lifetime-box {
+  background: linear-gradient(180deg, #fef3c7, #f5d08a);
+  border: 2.5px solid #8c572d;
+  border-radius: 14px;
+  padding: 10px;
+  color: #451a03;
+}
+
+.apk-priv-refresh-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.apk-priv-banner-pill {
+  font-weight: 900;
+  font-size: 12px;
+  color: #15803d;
+}
+
+.apk-month-card-box {
+  background: linear-gradient(180deg, #dcfce7, #86efac);
+  border-color: #16a34a;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.apk-month-badge-top {
+  font-size: 13px;
+  font-weight: 900;
+  color: #166534;
+  text-align: center;
+}
+
+.apk-month-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.apk-month-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+}
+
+.apk-month-icons {
+  display: flex;
+  gap: 10px;
+  font-weight: 900;
+  align-items: center;
+}
+
+.apk-price-blue-btn {
+  border: 2px solid #bae6fd;
+  background: linear-gradient(180deg, #38bdf8, #0284c7);
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.apk-lifetime-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #fffbeb, #fde68a);
+  cursor: pointer;
+}
+
+.apk-lifetime-box p {
+  margin: 2px 0 4px;
+  font-size: 11px;
+}
+
+.apk-lifetime-tag {
+  background: #78350f;
+  color: #fef08a;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.apk-gem-packs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.apk-gem-pack-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(180deg, #6b3f1d, #4b2a12);
+  border: 2px solid #b57c4b;
+  border-radius: 12px;
+  padding: 8px 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.apk-pack-amt {
+  background: #db2777;
+  font-size: 10.5px;
+  font-weight: 900;
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+
+.apk-pack-price {
+  background: linear-gradient(180deg, #fde047, #eab308);
+  color: #451a03;
+  font-weight: 900;
+  font-size: 11px;
+  padding: 2px 10px;
+  border-radius: 99px;
+}
+
+/* Legend Card Detail & Talent Tree */
+.apk-talent-btn {
+  position: absolute;
+  left: 4px;
+  bottom: -2px;
+  transform: scale(0.84);
+  transform-origin: left bottom;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: rgba(15, 23, 42, 0.55);
+  border-radius: 12px;
+  padding: 3px 6px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.lineup-slots-wave {
+  padding-left: 56px;
+}
+
+.legend-card.tier-common {
+  background: linear-gradient(180deg, rgba(74, 222, 128, 0.3), rgba(22, 163, 74, 0.45));
+  border: 2px solid #86efac;
+  border-radius: 14px;
+}
+
+.legend-card.tier-rare {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.35), rgba(37, 99, 235, 0.48));
+  border: 2px solid #7dd3fc;
+  border-radius: 14px;
+}
+
+.legend-card.tier-epic {
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.38), rgba(109, 40, 217, 0.52));
+  border: 2px solid #d8b4fe;
+  border-radius: 14px;
+}
+
+.legend-card.tier-mythic {
+  background: linear-gradient(180deg, rgba(250, 204, 21, 0.42), rgba(217, 119, 6, 0.55));
+  border: 2px solid #fef08a;
+  border-radius: 14px;
+}
+
+.apk-talent-btn small {
+  font-size: 9.5px;
+  font-weight: 900;
+  color: #fef08a;
+}
+
+.apk-talent-butterfly-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.apk-talent-butterfly-wrap span {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px #000;
+}
+
+.apk-talent-xp {
+  font-size: 8.5px;
+  font-weight: 800;
+}
+
+.apk-detail-backdrop {
+  padding: 6px;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.apk-nav-arrow {
+  width: 32px;
+  height: 44px;
+  border-radius: 99px;
+  border: 2px solid #fef08a;
+  background: #f59e0b;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  cursor: pointer;
+  flex-shrink: 0;
+  z-index: 6;
+}
+
+.apk-hero-detail-card {
+  position: relative;
+  width: min(318px, 84vw);
+  background: #fff;
+  color: #3f2204;
+  border-radius: 24px;
+  border: 3px solid #fef3c7;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+  overflow: visible;
+}
+
+.apk-detail-close {
+  position: absolute;
+  top: -14px;
+  right: -8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.apk-hero-splash-banner {
+  position: relative;
+  border-radius: 21px 21px 0 0;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
+.apk-hero-splash-banner.tier-common { background: linear-gradient(180deg, #4ade80, #bbf7d0); }
+.apk-hero-splash-banner.tier-rare { background: linear-gradient(180deg, #38bdf8, #bae6fd); }
+.apk-hero-splash-banner.tier-epic { background: linear-gradient(180deg, #a855f7, #e9d5ff); }
+.apk-hero-splash-banner.tier-mythic { background: linear-gradient(180deg, #f59e0b, #fef3c7); }
+
+.apk-splash-art {
+  margin-top: -54px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+}
+
+.apk-rarity-stamp {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65);
+  margin-top: -12px;
+}
+
+.apk-hero-stats-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #6b4423;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.apk-hp-pill {
+  color: #fda4af;
+  font-weight: 900;
+}
+
+.apk-power-pill {
+  background: #84cc16;
+  color: #fff;
+  font-weight: 900;
+  padding: 1px 8px;
+  border-radius: 99px;
+}
+
+.apk-detail-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.apk-detail-tabs button {
+  border: 1.5px solid #d6c3a5;
+  background: #f5ebd6;
+  color: #78350f;
+  font-weight: 900;
+  font-size: 12px;
+  padding: 5px 18px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.apk-detail-tabs button.active {
+  background: linear-gradient(180deg, #4ade80, #16a34a);
+  color: #fff;
+  border-color: #bbf7d0;
+}
+
+.apk-detail-skill-body {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 10px;
+  padding: 10px 12px;
+  align-items: start;
+}
+
+.apk-detail-left-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.apk-detail-circle-head {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 3px solid #60a5fa;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.apk-detail-mana {
+  position: absolute;
+  bottom: -2px;
+  background: #0284c7;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 0 6px;
+  border-radius: 99px;
+}
+
+.apk-detail-role-tag {
+  font-size: 11px;
+  font-weight: 900;
+  color: #2563eb;
+}
+
+.apk-demo-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1.5px solid #facc15;
+  background: linear-gradient(180deg, #4d7c0f, #365314);
+  color: #fef08a;
+  font-size: 9px;
+  font-weight: 900;
+  border-radius: 10px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.apk-demo-play {
+  font-size: 15px;
+  color: #f97316;
+}
+
+.apk-skill-desc-text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #3f2204;
+}
+
+.apk-skill-meta-line {
+  display: block;
+  margin-top: 6px;
+  color: #78350f;
+  font-size: 10.5px;
+}
+
+.btn-slot.dark {
+  background: #e2e8f0;
+  color: #334155;
+  border-color: #94a3b8;
+}
+
+.btn-slot.dark.active {
+  background: #16a34a;
+  color: #fff;
+  border-color: #14532d;
+}
+
+.apk-detail-bottom-mint {
+  background: #ecfdf5;
+  border-radius: 0 0 21px 21px;
+  padding: 10px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.apk-detail-lv-badge {
+  font-size: 15px;
+  font-weight: 900;
+  color: #b45309;
+}
+
+.apk-max-lv-text {
+  font-size: 12px;
+  font-weight: 800;
+  color: #15803d;
+}
+
+/* Cây Thiên Phú Fullscreen */
+.apk-talent-fullscreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 28, 16, 0.88);
+  z-index: 48;
+  display: grid;
+  place-items: center;
+}
+
+.apk-talent-canvas {
+  position: relative;
+  width: min(410px, 100vw);
+  height: 100dvh;
+  background: linear-gradient(180deg, #a7f3d0 0%, #6ee7b7 45%, #34d399 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 12px 12px;
+}
+
+.apk-talent-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.apk-talent-tree-trunk {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: radial-gradient(ellipse at center bottom, rgba(234, 179, 8, 0.45) 0%, transparent 65%);
+  padding: 20px 0 6px;
+}
+
+.apk-talent-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.apk-talent-node {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 3px solid #cbd5e1;
+  background: #334155;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.apk-talent-node.color-violet { border-color: #c084fc; background: #581c87; }
+.apk-talent-node.color-amber { border-color: #fdba74; background: #9a3412; }
+.apk-talent-node.color-jade { border-color: #86efac; background: #14532d; }
+.apk-talent-node.color-azure { border-color: #7dd3fc; background: #0c4a6e; }
+.apk-talent-node.unlocked { box-shadow: 0 0 14px #fde047; border-color: #fef08a; }
+
+.apk-talent-footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #064e3b;
+  font-weight: 900;
+  font-size: 12px;
+  position: relative;
+}
+
+.apk-talent-butterfly-big {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.apk-talent-butterfly-big strong {
+  position: absolute;
+  color: #fef08a;
+  font-size: 20px;
+  text-shadow: 0 2px 4px #000;
+}
+
+.apk-talent-reset-btn {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 2px solid #fef08a;
+  background: #d97706;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.apk-talent-presets {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+.apk-preset-tab {
+  border: 1.5px solid #a16207;
+  background: #78350f;
+  color: #fde68a;
+  font-size: 10.5px;
+  font-weight: 900;
+  padding: 6px 2px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.apk-preset-tab.active {
+  background: #f59e0b;
+  color: #fff;
+  border-color: #fef08a;
+}
+
+/* Shared APK Modals (Profile, Rank, Social, Summon, Privilege, Activity, Treasure, Newcomer) */
+.apk-modal-shell {
+  position: relative;
+  width: min(390px, 95vw);
+  max-height: 88dvh;
+  overflow-y: auto;
+}
+
+.apk-float-toast {
+  position: sticky;
+  top: 4px;
+  z-index: 30;
+  margin-bottom: 6px;
+  background: #14532d;
+  color: #fef08a;
+  border: 1.5px solid #86efac;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.apk-green-modal,
+.apk-privilege-modal,
+.apk-activity-modal,
+.apk-treasure-modal,
+.apk-newcomer-modal,
+.apk-summon-portal-modal,
+.apk-rank-fullscreen {
+  background: #fff;
+  color: #3f2204;
+  border-radius: 20px;
+  border: 3px solid #dcfce7;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+}
+
+.apk-green-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(180deg, #4ade80, #16a34a);
+  color: #fff;
+  padding: 10px 12px;
+}
+
+.apk-green-head h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.apk-green-head button:not(.apk-x-btn) {
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.apk-green-head button.active {
+  background: #fde047;
+  color: #78350f;
+}
+
+.apk-x-btn {
+  border: 1.5px solid #fef08a;
+  background: #92400e;
+  color: #fef08a;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.apk-modal-body-light,
+.apk-pinfo-body {
+  padding: 12px;
+  font-size: 12.5px;
+}
+
+.apk-pinfo-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #f0fdf4;
+}
+
+.apk-pinfo-avatar-btn {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.apk-pinfo-frame {
+  position: absolute;
+  inset: -4px;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+}
+
+.apk-pinfo-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.apk-pinfo-row.sub {
+  font-size: 11px;
+  color: #5c3a1e;
+  margin-top: 2px;
+}
+
+.apk-mini-edit-btn {
+  border: none;
+  background: #a855f7;
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.apk-pinfo-tabs {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 6px;
+  background: #ecfdf5;
+}
+
+.apk-pinfo-tabs button {
+  border: 1px solid #bbf7d0;
+  background: #f3ead8;
+  color: #5c3a1e;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.apk-pinfo-tabs button.active {
+  background: #16a34a;
+  color: #fff;
+}
+
+.apk-sec-divider {
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 900;
+  color: #78350f;
+  margin: 8px 0 6px;
+}
+
+.apk-lineup-heads-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.apk-head-lv-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  color: #15803d;
+}
+
+.apk-empty-head {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: grid;
+  place-items: center;
+}
+
+.apk-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.apk-badge-slot {
+  border: 1.5px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.apk-badge-slot small {
+  font-size: 10px;
+  color: #ea580c;
+}
+
+.apk-stats-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+}
+
+.apk-stats-rows > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fef3c7;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.apk-stats-rows strong {
+  color: #ea580c;
+}
+
+.apk-rename-body,
+.apk-exchange-body,
+.apk-empty-mascot-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.apk-rename-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 99px;
+  border: 1.5px solid #cbd5e1;
+  text-align: center;
+}
+
+.apk-avatar-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 10px;
+}
+
+.apk-av-choice {
+  border: 2px solid transparent;
+  background: #f0fdf4;
+  border-radius: 12px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.apk-av-choice.selected {
+  border-color: #16a34a;
+  background: #dcfce7;
+}
+
+.apk-badge-dark-popup {
+  background: #1e1b4b;
+  color: #fef08a;
+  padding: 20px;
+  border-radius: 18px;
+  border: 2px solid #a78bfa;
+  text-align: center;
+}
+
+.apk-badge-big-ico {
+  font-size: 56px;
+  margin: 10px 0;
+}
+
+/* Rank Modal */
+.apk-rank-fullscreen {
+  background: linear-gradient(180deg, #86efac, #15803d);
+  color: #fff;
+  padding: 10px;
+  position: relative;
+}
+
+.apk-close-corner {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: #92400e;
+  color: #fef08a;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.apk-rank-podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  gap: 6px;
+  padding: 14px 4px 8px;
+  text-align: center;
+}
+
+.podium-spot,
+.guild-flag {
+  background: rgba(15, 23, 42, 0.35);
+  border-radius: 12px;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.podium-spot.p1,
+.guild-flag.p1 {
+  background: linear-gradient(180deg, rgba(250, 204, 21, 0.45), rgba(180, 83, 9, 0.55));
+  border: 1.5px solid #fef08a;
+}
+
+.apk-rank-tabs-main,
+.apk-rank-tabs-sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+.apk-rank-tabs-main button,
+.apk-rank-tabs-sub button {
+  border: none;
+  border-radius: 99px;
+  padding: 6px;
+  font-weight: 900;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+}
+
+.apk-rank-tabs-main button.active { background: #facc15; color: #78350f; }
+.apk-rank-tabs-sub button.active { background: #ecfdf5; color: #166534; }
+
+.apk-rank-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 6px 0;
+}
+
+.apk-rank-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(236, 253, 245, 0.92);
+  color: #14532d;
+  border-radius: 12px;
+  padding: 6px 8px;
+}
+
+.rank-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f59e0b;
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.rank-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 11.5px;
+}
+
+.rank-cups {
+  font-weight: 900;
+  color: #b45309;
+  font-size: 12px;
+}
+
+.apk-rank-self-footer {
+  display: flex;
+  justify-content: space-between;
+  background: #14532d;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 11.5px;
+}
+
+/* Chat / Summon / Privilege / Activity / Treasure / Newcomer Modals */
+.apk-chat-panel {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.apk-chat-feed {
+  background: #f5f5f4;
+  border-radius: 12px;
+  padding: 8px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.apk-chat-bubble {
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.apk-chat-input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.apk-chat-input-row input {
+  flex: 1;
+  padding: 7px 10px;
+  border-radius: 99px;
+  border: 1.5px solid #cbd5e1;
+}
+
+.apk-guild-top-banner {
+  background: #6366f1;
+  color: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+}
+
+.apk-summon-portal-modal {
+  background: linear-gradient(180deg, #581c87, #3b0764);
+  color: #fff;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.apk-summon-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.apk-summon-btn-pair {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.apk-purple-btn {
+  border: 2px solid #e9d5ff;
+  background: linear-gradient(180deg, #a855f7, #7e22ce);
+  color: #fff;
+  font-weight: 900;
+  padding: 8px 14px;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.apk-summon-results-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.apk-mini-pull-chip {
+  background: rgba(255, 255, 255, 0.14);
+  padding: 4px 6px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 9.5px;
+}
+
+.apk-pass-body,
+.apk-month-modal-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.apk-pass-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.apk-pass-rows {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.apk-pass-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.apk-wood-tabs-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #78350f;
+  padding: 8px 10px;
+}
+
+.apk-wood-tabs-top button:not(.apk-x-btn) {
+  flex: 1;
+  border: 1.5px solid #d97706;
+  background: #9a3412;
+  color: #fde68a;
+  font-weight: 900;
+  font-size: 11px;
+  padding: 6px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.apk-wood-tabs-top button.active {
+  background: #facc15;
+  color: #78350f;
+}
+
+.apk-sub-shelf-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 6px 8px;
+  background: #5c3a1e;
+}
+
+.apk-sub-shelf-tabs button {
+  border: 1px solid #b57c4b;
+  background: #78350f;
+  color: #fef3c7;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.apk-sub-shelf-tabs button.active {
+  background: #fde047;
+  color: #451a03;
+}
+
+.apk-login-14-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 10px;
+}
+
+.apk-day-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: #fef9c3;
+  border: 1.5px solid #facc15;
+  border-radius: 10px;
+  padding: 5px 2px;
+  font-size: 9.5px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.apk-day-tile.claimed {
+  opacity: 0.65;
+  background: #dcfce7;
+}
+
+.apk-act-card-body {
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.apk-treasure-modal {
+  background: linear-gradient(180deg, #93c5fd, #c28e5c);
+  padding: 10px;
+}
+
+.apk-treasure-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.apk-treasure-cell {
+  background: #e0f2fe;
+  border: 2px solid #60a5fa;
+  border-radius: 10px;
+  padding: 5px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 9.5px;
+  font-weight: 800;
+}
+
+.apk-treasure-cell.lit {
+  background: #fef08a;
+  border-color: #f59e0b;
+  box-shadow: 0 0 10px #fde047;
+}
+
+.apk-treasure-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.apk-skip-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.apk-treasure-milestones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.apk-treasure-milestones .reached {
+  color: #15803d;
+}
+
+.apk-intro-preview {
+  width: 220px;
+  border-radius: 14px;
+  border: 2px solid #fef08a;
+}
+
+.apk-newcomer-modal {
+  background: linear-gradient(180deg, #bbf7d0, #fef3c7);
+  padding: 10px;
+}
+
+.apk-newcomer-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.apk-newcomer-body.purple {
+  background: linear-gradient(180deg, #4c1d95, #312e81);
+  color: #fff;
+  border-radius: 14px;
+}
+
+.apk-3days-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+}
+
+.apk-day-box {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  color: #451a03;
+}

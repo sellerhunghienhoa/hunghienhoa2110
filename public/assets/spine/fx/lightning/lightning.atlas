@@ -1,0 +1,48 @@
+
+lightning.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cheng
+  rotate: false
+  xy: 102, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+hong
+  rotate: false
+  xy: 203, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+huang
+  rotate: false
+  xy: 304, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+lan
+  rotate: false
+  xy: 504, 3
+  size: 98, 98
+  orig: 100, 100
+  offset: 2, 2
+  index: -1
+lv
+  rotate: true
+  xy: 405, 1
+  size: 100, 98
+  orig: 100, 100
+  offset: 0, 2
+  index: -1
+zi
+  rotate: false
+  xy: 1, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1

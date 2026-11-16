@@ -1,0 +1,20 @@
+
+icon_storebox03.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guan
+  rotate: false
+  xy: 0, 0
+  size: 261, 229
+  orig: 300, 300
+  offset: 14, 40
+  index: -1
+kai
+  rotate: false
+  xy: 0, 229
+  size: 264, 256
+  orig: 300, 300
+  offset: 18, 28
+  index: -1

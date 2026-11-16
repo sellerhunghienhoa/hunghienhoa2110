@@ -1,0 +1,20 @@
+
+icon_storebox04.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guan
+  rotate: true
+  xy: 283, 24
+  size: 273, 247
+  orig: 300, 300
+  offset: 13, 26
+  index: -1
+kai
+  rotate: false
+  xy: 0, 0
+  size: 283, 297
+  orig: 300, 300
+  offset: 7, 3
+  index: -1

@@ -1,0 +1,27 @@
+
+b103.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hua
+  rotate: false
+  xy: 1, 7
+  size: 117, 89
+  orig: 117, 89
+  offset: 0, 0
+  index: -1
+shugan
+  rotate: true
+  xy: 119, 1
+  size: 60, 76
+  orig: 60, 76
+  offset: 0, 0
+  index: -1
+yingzi
+  rotate: false
+  xy: 119, 62
+  size: 84, 34
+  orig: 84, 34
+  offset: 0, 0
+  index: -1

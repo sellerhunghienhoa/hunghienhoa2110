@@ -1,0 +1,20 @@
+
+b106.png
+size: 128,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shuwu
+  rotate: false
+  xy: 1, 4
+  size: 71, 76
+  orig: 71, 76
+  offset: 0, 0
+  index: -1
+yingzi
+  rotate: true
+  xy: 73, 1
+  size: 79, 26
+  orig: 79, 26
+  offset: 0, 0
+  index: -1

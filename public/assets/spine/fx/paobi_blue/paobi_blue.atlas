@@ -1,0 +1,55 @@
+
+paobi_blue.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pb_1
+  rotate: false
+  xy: 1, 2
+  size: 122, 122
+  orig: 128, 128
+  offset: 3, 3
+  index: -1
+pb_1a
+  rotate: true
+  xy: 346, 1
+  size: 123, 98
+  orig: 128, 128
+  offset: 3, 15
+  index: -1
+pb_2
+  rotate: true
+  xy: 445, 2
+  size: 122, 68
+  orig: 128, 128
+  offset: 3, 30
+  index: -1
+pb_3
+  rotate: true
+  xy: 583, 2
+  size: 122, 32
+  orig: 128, 128
+  offset: 3, 50
+  index: -1
+pb_4
+  rotate: true
+  xy: 514, 2
+  size: 122, 68
+  orig: 128, 128
+  offset: 3, 26
+  index: -1
+pb_4a
+  rotate: true
+  xy: 247, 1
+  size: 123, 98
+  orig: 128, 128
+  offset: 3, 15
+  index: -1
+pb_5
+  rotate: false
+  xy: 124, 2
+  size: 122, 122
+  orig: 128, 128
+  offset: 3, 3
+  index: -1

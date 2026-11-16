@@ -1,0 +1,27 @@
+
+b108.png
+size: 64,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hua
+  rotate: false
+  xy: 1, 56
+  size: 50, 35
+  orig: 50, 35
+  offset: 0, 0
+  index: -1
+shu
+  rotate: true
+  xy: 20, 18
+  size: 37, 34
+  orig: 37, 34
+  offset: 0, 0
+  index: -1
+yingzi
+  rotate: true
+  xy: 1, 1
+  size: 54, 18
+  orig: 54, 18
+  offset: 0, 0
+  index: -1

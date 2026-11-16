@@ -1,0 +1,34 @@
+
+b105.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+kuangdong
+  rotate: false
+  xy: 1, 5
+  size: 100, 98
+  orig: 100, 98
+  offset: 0, 0
+  index: -1
+yezi1
+  rotate: false
+  xy: 102, 1
+  size: 67, 53
+  orig: 67, 53
+  offset: 0, 0
+  index: -1
+yezi2
+  rotate: true
+  xy: 170, 1
+  size: 53, 33
+  orig: 55, 36
+  offset: 2, 3
+  index: -1
+yingzi
+  rotate: false
+  xy: 102, 55
+  size: 100, 48
+  orig: 100, 48
+  offset: 0, 0
+  index: -1

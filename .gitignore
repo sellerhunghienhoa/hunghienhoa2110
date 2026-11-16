@@ -1,0 +1,8 @@
+node_modules/
+dist/
+build-ios/
+*.ipa
+.DS_Store
+New folder/
+*.xapk
+*.apk
